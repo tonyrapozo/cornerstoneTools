@@ -65,7 +65,7 @@
 
 <!-- include the cornerstone tools library -->
 <script src="../../dist/cornerstoneTools.js"></script>
-<script>window.cornerstoneTools || document.write('<script src="https://unpkg.com/cornerstone-tools">\x3C/script>')</script>
+<script>window.cornerstoneTools || document.write('<script src="https://unpkg.com/cornerstone-tools@next">\x3C/script>')</script>
 
 <!-- include special code for these examples which provides images -->
 <script src="../exampleImageLoader.js"></script>
@@ -126,7 +126,7 @@
             viewport.rotation +=90;
             cornerstone.setViewport(element, viewport);
         });
-        
+
         document.getElementById('reset').addEventListener('click', function (e) {
             viewport = cornerstone.getViewport(element);
             viewport.hflip = false;

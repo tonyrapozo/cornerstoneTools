@@ -85,7 +85,7 @@
 
 <!-- include the cornerstone tools library -->
 <script src="../../dist/cornerstoneTools.js"></script>
-<script>window.cornerstoneTools || document.write('<script src="https://unpkg.com/cornerstone-tools">\x3C/script>')</script>
+<script>window.cornerstoneTools || document.write('<script src="https://unpkg.com/cornerstone-tools@next">\x3C/script>')</script>
 
 <!-- include special code for these examples which provides images -->
 <script src="../exampleImageLoader.js"></script>
@@ -129,7 +129,7 @@
         var enabledElement = cornerstone.getEnabledElement(element);
         var imagePlaneMetaData = cornerstone.metaData.get('imagePlaneModule', enabledElement.image.imageId);
         console.log(imagePlaneMetaData);
-        
+
         var rowString = cornerstoneTools.orientation.getOrientationString(imagePlaneMetaData.rowCosines);
         var columnString = cornerstoneTools.orientation.getOrientationString(imagePlaneMetaData.columnCosines);
 
@@ -193,7 +193,7 @@
             viewport = cornerstone.getViewport(element);
             viewport.hflip = !viewport.hflip;
             cornerstone.setViewport(element, viewport);
-          
+
             var rightMid = element.querySelector('.mrrightmiddle .orientationMarker');
             var leftMid = element.querySelector('.mrleftmiddle .orientationMarker');
             var temp = rightMid.textContent;
@@ -224,7 +224,7 @@
             viewport.rotation +=90;
             cornerstone.setViewport(element, viewport);
         });
-        
+
         document.getElementById('reset').addEventListener('click', function (e) {
             viewport = cornerstone.getViewport(element);
             viewport.hflip = false;

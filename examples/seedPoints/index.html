@@ -99,7 +99,7 @@
 
 <!-- include the cornerstone tools library -->
 <script src="../../dist/cornerstoneTools.js"></script>
-<script>window.cornerstoneTools || document.write('<script src="https://unpkg.com/cornerstone-tools">\x3C/script>')</script>
+<script>window.cornerstoneTools || document.write('<script src="https://unpkg.com/cornerstone-tools@next">\x3C/script>')</script>
 
 <!-- include special code for these examples which provides images -->
 <script src="../exampleImageLoader.js"></script>
@@ -110,20 +110,20 @@
   // Register the dialogs using the HTML5 Dialog Polyfill
   var relabelDialog = document.querySelector('.relabelDialog');
   dialogPolyfill.registerDialog(relabelDialog);
-  
+
   var element = document.getElementById('dicomImage');
   var imageId = 'example://1';
-  
+
   // Define a callback to get your text annotation
   // This could be used, e.g. to open a modal
   function getTextCallback(doneGetTextCallback) {
-    
+
     if ( config.countUp ) {
       config.currentNumber++;
     } else {
       config.currentNumber--;
     }
-    
+
     var text = config.currentLetter + config.currentNumber;
     doneGetTextCallback(text);
   }
@@ -132,10 +132,10 @@
   // This could be used, e.g. to open a modal
   function changeTextCallback(data, eventData, doneChangingTextCallback) {
     var relabelDialog = document.querySelector('.relabelDialog');
-    
+
     var getTextLetter = document.getElementById('relabelText');
     var getTextNumber = document.getElementById('relabelNumber');
-    
+
     var confirm = relabelDialog.querySelector('.relabelConfirm');
     var remove = relabelDialog.querySelector('.relabelRemove');
 
@@ -241,7 +241,7 @@
       cornerstoneTools.seedAnnotateTouch.deactivate(element);
       return false;
     });
-      
+
     document.getElementById('check-coords').addEventListener('click', function() {
       config.showCoordinates = document.getElementById('check-coords').checked;
       cornerstone.updateImage(element);
@@ -257,7 +257,7 @@
     document.getElementById('f-letter').addEventListener('propertychange', updateLetter);
     document.getElementById('f-letter').addEventListener('paste', updateLetter);
     var updateNumber = function() {
-      if (config.countUp == true ) { 
+      if (config.countUp == true ) {
         config.currentNumber = parseInt(document.getElementById('f-number').value) - 1;
       } else {
         config.currentNumber = parseInt(document.getElementById('f-number').value) + 1;
@@ -266,7 +266,7 @@
     document.getElementById('f-number').addEventListener('input', updateNumber);
     document.getElementById('f-number').addEventListener('propertychange', updateNumber);
     document.getElementById('f-number').addEventListener('paste', updateNumber);
-      
+
     var toolType = 'seedAnnotate';
     var clearLabels = document.getElementById('clearLabels');
     clearLabels.addEventListener('click', function() {
@@ -275,13 +275,13 @@
       cornerstone.updateImage(element);
       // Reset the initial values for naming
       config.currentLetter = document.getElementById('f-letter').value;
-      if (config.countUp == true ) { 
+      if (config.countUp == true ) {
         config.currentNumber = parseInt(document.getElementById('f-number').value) - 1;
       } else {
         config.currentNumber = parseInt(document.getElementById('f-number').value) + 1;
       }
     })
-      
+
   });
 
 </script>
