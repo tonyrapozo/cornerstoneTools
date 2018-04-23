@@ -5,6 +5,16 @@ module.exports = {
     'node': true,
     'mocha': true
   },
+  'settings': {
+    'import/resolver': {
+      'webpack': {
+        'config': 'config/webpack/webpack-base.js'
+      },
+      'node': {
+        'paths': ['src']
+      }
+    }
+  },
   'extends': 'eslint:recommended',
   'plugins': ['import'],
   'parserOptions': {
