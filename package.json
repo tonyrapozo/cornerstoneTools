@@ -1,6 +1,6 @@
 {
-  "name": "cornerstone-tools",
-  "version": "2.3.6",
+  "name": "mv-cornerstone-tools",
+  "version": "2.3.7",
   "description": "Medical imaging tools for the Cornerstone library",
   "main": "./dist/cornerstoneTools.min.js",
   "keywords": [
@@ -9,12 +9,12 @@
     "imaging"
   ],
   "author": "Chris Hafey, Prasath",
-  "homepage": "https://github.com/cornerstonejs/cornerstoneTools",
+  "homepage": "https://github.com/tonyrapozo/cornerstoneTools",
   "license": "MIT",
   "module": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cornerstonejs/cornerstoneTools.git"
+    "url": "https://github.com/tonyrapozo/cornerstoneTools.git"
   },
   "scripts": {
     "build": "npm run test && npm run version && npm run webpack",
