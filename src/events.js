@@ -43,7 +43,10 @@ const EVENTS = {
   CLIP_STOPPED: 'cornerstonetoolsclipstopped',
   STACK_SCROLL: 'cornerstonestackscroll', // Should be renamed
 
-  LINE_SAMPLE_UPDATED: 'cornerstonelinesampleupdated'
+  LINE_SAMPLE_UPDATED: 'cornerstonelinesampleupdated',
+
+  IMAGE_PREFETCHED: 'cornerstoneimageprefethed'
+
 };
 
 export default EVENTS;

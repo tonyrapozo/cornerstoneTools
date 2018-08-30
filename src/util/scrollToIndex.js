@@ -35,7 +35,7 @@ export default function (element, newImageIdIndex) {
   const endLoadingHandler = loadHandlerManager.getEndLoadHandler();
   const errorLoadingHandler = loadHandlerManager.getErrorLoadingHandler();
 
-  function doneCallback (image) {
+  function doneCallback(image) {
     if (stackData.currentImageIdIndex !== newImageIdIndex) {
       return;
     }
@@ -45,7 +45,7 @@ export default function (element, newImageIdIndex) {
     try {
       // TODO: Add 'isElementEnabled' to Cornerstone?
       cornerstone.getEnabledElement(element);
-    } catch(error) {
+    } catch (error) {
       return;
     }
 
@@ -61,7 +61,7 @@ export default function (element, newImageIdIndex) {
     }
   }
 
-  function failCallback (error) {
+  function failCallback(error) {
     const imageId = stackData.imageIds[newImageIdIndex];
 
     if (errorLoadingHandler) {
@@ -85,27 +85,32 @@ export default function (element, newImageIdIndex) {
   stackData.currentImageIdIndex = newImageIdIndex;
   const newImageId = stackData.imageIds[newImageIdIndex];
 
-  // Retry image loading in cases where previous image promise
-  // Was rejected, if the option is set
-  /*
-
-    Const config = stackScroll.getConfiguration();
-
-    TODO: Revisit this. It appears that Core's imageCache is not
-    keeping rejected promises anywhere, so we have no way to know
-    if something was previously rejected.
-
-    if (config && config.retryLoadOnScroll === true) {
-    }
-  */
-
   // Convert the preventCache value in stack data to a boolean
   const preventCache = Boolean(stackData.preventCache);
 
   let imagePromise;
 
+  let voi = undefined;
+
+  let enabledElement = cornerstone.getEnabledElement(element);
+
+  var metadata = stackData.metadataProvider.getMetadata(newImageId);
+  var lastMetadata = stackData.metadataProvider.getMetadata(enabledElement.renderingTools.lastRenderedImageId);
+
+  if (enabledElement.renderingTools.lastRenderedViewport) {
+
+    enabledElement.viewport.voi.windowWidth = metadata.instance.windowWidth + (enabledElement.renderingTools.lastRenderedViewport.windowWidth - lastMetadata.instance.windowWidth);
+
+    enabledElement.viewport.voi.windowCenter = metadata.instance.windowCenter + (enabledElement.renderingTools.lastRenderedViewport.windowCenter - lastMetadata.instance.windowCenter);
+    
+    if (enabledElement.viewport.voi.windowWidth !== lastMetadata.instance.windowWidth &&
+        enabledElement.viewport.voi.windowCenter !== lastMetadata.instance.windowCenter) {
+      voi = enabledElement.viewport.voi
+    }
+  }
+
   if (preventCache) {
-    imagePromise = cornerstone.loadImage(newImageId);
+    imagePromise = cornerstone.loadImage(newImageId, voi);
   } else {
     imagePromise = cornerstone.loadAndCacheImage(newImageId);
   }
