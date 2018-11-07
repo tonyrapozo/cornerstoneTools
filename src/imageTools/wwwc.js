@@ -55,37 +55,6 @@ function mouseDragCallback (e) {
   external.cornerstone.setViewport(eventData.element, eventData.viewport);
 }
 
-function touchDragCallback (e) {
-  const eventData = e.detail;
-
-  e.stopImmediatePropagation(); // Prevent CornerstoneToolsTouchStartActive from killing any press events
-  const dragData = eventData;
-
-  const maxVOI = dragData.image.maxPixelValue * dragData.image.slope + dragData.image.intercept;
-  const minVOI = dragData.image.minPixelValue * dragData.image.slope + dragData.image.intercept;
-  const imageDynamicRange = maxVOI - minVOI;
-  const multiplier = imageDynamicRange / 1024;
-  const deltaX = dragData.deltaPoints.page.x * multiplier;
-  const deltaY = dragData.deltaPoints.page.y * multiplier;
-
-  const config = wwwc.getConfiguration();
-
-  if (config.orientation) {
-    if (config.orientation === 0) {
-      dragData.viewport.voi.windowWidth += (deltaX);
-      dragData.viewport.voi.windowCenter += (deltaY);
-    } else {
-      dragData.viewport.voi.windowWidth += (deltaY);
-      dragData.viewport.voi.windowCenter += (deltaX);
-    }
-  } else {
-    dragData.viewport.voi.windowWidth += (deltaX);
-    dragData.viewport.voi.windowCenter += (deltaY);
-  }
-
-  external.cornerstone.setViewport(dragData.element, dragData.viewport);
-}
-
 const wwwc = simpleMouseButtonTool(mouseDownCallback, toolType);
 
 wwwc.strategies = {
@@ -94,7 +63,7 @@ wwwc.strategies = {
 
 wwwc.strategy = defaultStrategy;
 
-const wwwcTouchDrag = touchDragTool(touchDragCallback);
+const wwwcTouchDrag = touchDragTool(mouseDragCallback);
 
 export {
   wwwc,
