@@ -56,7 +56,7 @@ export default function (element, images, loop = false, allowSkipping = true) {
     newImageIdIndex = clip(newImageIdIndex, 0, stackData.imageIds.length - 1);
   }
 
-  allowSkipping = false; // forcing to false to prevent configuration for skipping;
+  allowSkipping = true; // forcing to false to prevent configuration for skipping;
   if (allowSkipping) { 
     scrollToIndex(element, newImageIdIndex);
   } else {
